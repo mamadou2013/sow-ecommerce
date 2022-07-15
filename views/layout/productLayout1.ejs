@@ -1,0 +1,58 @@
+<% products.forEach(product =>{ %> 
+    <% if(product.subCategoryId === index){ %>
+        <li class="col-6 col-md-3 col-lg-3 product-item">
+            <div class="product-item__outer h-100">
+                <div class="product-item__inner px-xl-4 p-3">
+                    <div class="product-item__body pb-xl-2">
+                        
+                        <div class="row">
+                            <div class="col-7">
+                                <h5 class="mb-1 product-item__title"><a href='/products/<%= product.id %>' class="text-blue font-weight-bold"><%= product.product_name %></a></h5>
+                            </div>
+                            <% if(product.discount != 0 ){ %> 
+                                <div class="col-4">
+                                    <p style="background: #FED700; color: white; width:2rem" class="px-1">-<%= Math.floor( (product.discount * 100 ) / product.product_price ) %>%</p>
+                                </div>
+                            <% } %> 
+                        </div>
+                        <div class="mb-2">
+                            <!-- to change -->
+                            <% for(let picture of pictures){  
+                                if(picture.productId === product.id){ %>
+                                    <a href='/products/<%= product.id %>' class="d-block text-center"><img class="img-fluid" src='<%= picture.image %>'  alt="Image Description"></a>
+                                <% break;}
+                            }%>    
+                        </div>
+                        <% if(product.discount === 0 ){ %> 
+                            <div class="flex-center-between mb-1 mt-4">
+                                <div class="prodcut-price">
+                                    <div class="text-gray-100">¢<%= product.product_price %>.00 </div>
+                                </div>
+                                <div class="d-none d-xl-block prodcut-add-cart">
+                                    <a href='/products/<%= product.id %>' class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                </div>
+                            </div>
+                            <% } else { %>
+                                <div class="flex-center-between mb-1 mt-4">
+                                    <div class="prodcut-price d-flex align-items-center position-relative">
+                                        <ins class="font-size-18 text-green text-decoration-none">¢<%= product.product_price - product.discount%>.00</ins>
+                                        <del class="font-size-13 tex-red position-absolute bottom-100" style="color: red;">¢<%= product.product_price %>.00 </del>
+                                    </div>
+                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                        <a href='/products/<%= product.id %>' class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                    </div>
+                                </div> 
+                            <% } %>
+                    </div>
+                    <% if(user.username){  %> 
+                        <div class="product-item__footer">
+                            <div class="border-top pt-2 flex-center-between flex-wrap">
+                                <a href="/like/<%= product.id %>" class="text-gray-6 font-size-13" id="like-product"><i class="ec ec-favorites mr-1 font-size-17"></i> Like the product</a>
+                            </div>
+                        </div>
+                    <%} %>
+                </div>
+            </div>
+        </li>
+    <% } %>
+<% }) %> 

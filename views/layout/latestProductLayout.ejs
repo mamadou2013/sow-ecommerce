@@ -1,0 +1,41 @@
+<div class="mb-8">
+    <div class="border-bottom border-color-1 mb-5">
+        <h3 class="section-title section-title__sm mb-0 pb-2 font-size-18">Latest Products</h3>
+    </div>
+    <ul class="list-unstyled">
+        <!-- Foreach for the latest products "5 Products to show" -->
+        <% for(const [index, product] of products.entries()){ %> 
+        <li class="mb-4">
+            <div class="row">
+                <div class="col-auto">
+                    <a href='/products/<%= product.id %>' class="d-block width-75">
+                        <% for(let picture of pictures){
+                            if(picture.productId === product.id){%>
+                                <img class="img-fluid" src='<%= picture.image %>' alt="Image Description">
+                            <% break;}
+                        }%>
+                    </a>
+                </div>
+                <div class="col">
+                    <h3 class="text-lh-1dot2 font-size-14 mb-0"><a href='/products/<%= product.id %>'><%= product.product_description %> </a></h3>
+                    <div class="text-warning text-ls-n2 font-size-16 mb-1" style="width: 80px;">
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="far fa-star text-muted"></small>
+                    </div>
+                    <div class="font-weight-bold">
+                        <% if(product.discount != 0){ %>
+                            <del class="font-size-11 d-block" style="color: red;">¢<%= product.product_price %>.00</del>
+                        <% } %>  
+                        
+                        <ins class="font-size-15 text-green text-decoration-none d-block">¢<%= product.product_price - product.discount%>.00</ins>
+                    </div>
+                </div>
+            </div>
+        </li>
+       
+        <% if(index === 4){break;} } %> 
+    </ul>
+</div>

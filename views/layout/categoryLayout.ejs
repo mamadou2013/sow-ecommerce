@@ -1,0 +1,30 @@
+ <!-- Nav nav-pills -->
+ <div class="position-relative text-center z-index-2">
+    <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
+        <h3 class="section-title mb-0 pb-2 font-size-22"><%= categoryName %></h3>
+    </div>
+</div>
+<!-- End Nav Pills -->
+<div class="row">
+    <!-- menu subcategories -->
+    <div class="col-12 col-xl-auto pr-lg-2">
+        <div class="min-width-200 mt-xl-5">
+            <ul class="list-group list-group-flush flex-nowrap flex-xl-wrap flex-row flex-xl-column overflow-auto overflow-xl-visble mb-3 mb-xl-0">
+                <!-- Alpha1 -->
+                <% smartTablets.forEach(smartTablet=>{ %>
+                    <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html"><%= smartTablet.sub_name %></a></li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-auto">
+        <a href="../shop/shop.html" class="d-block"><img class="img-fluid" src='./assets/img/360X616/Smartphones and Tablets1.png' alt="Image Description"></a></div>
+    <div class="col-md pl-md-0">
+        <!-- Tab Content -->
+        <div class="tab-content" id="Bpills-tabContent">
+            <div class="tab-pane fade pt-2 show active" id="Bpills-one-example1" role="tabpanel" aria-labelledby="Bpills-one-example1-tab">
+                <%- include('../layout/bestProductLayout', {products:products, pictures: pictures});%>
+            </div>
+        </div>
+    </div>
+</div>

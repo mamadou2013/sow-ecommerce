@@ -1,0 +1,262 @@
+<%- include('../layout/header');%>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main id="content" role="main">
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../shop/shop.html"><%= subCategory.sub_name  %></a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1" aria-current="page"><%= product.product_name %></li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <!-- End breadcrumb -->
+    <div class="container">
+        <!-- Single Product Body -->
+        <div class="mb-xl-14 mb-6">
+            <div class="row">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <div id="sliderSyncingNav" class="js-slick-carousel u-slick mb-2"
+                        data-infinite="true"
+                        data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-centered--y rounded-circle"
+                        data-arrow-left-classes="fas fa-arrow-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-lg-2 ml-xl-4"
+                        data-arrow-right-classes="fas fa-arrow-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-lg-2 mr-xl-4"
+                        data-nav-for="#sliderSyncingThumb">
+                        <% pictures.forEach(picture=>{ %>
+                            <div class="js-slide" style="align-content: center;">
+                                <img class="img-fluid" src='<%= picture.image %>' alt="Image Description" style="width: 420px ; height: 300px;">
+                            </div>
+                        <% }) %>  
+                    </div>
+                    <div id="sliderSyncingThumb" class="js-slick-carousel u-slick u-slick--slider-syncing u-slick--slider-syncing-size u-slick--gutters-1 u-slick--transform-off"
+                        data-infinite="true"
+                        data-slides-show="5"
+                        data-is-thumbs="true"
+                        data-nav-for="#sliderSyncingNav">
+                        <% pictures.forEach(picture=>{ %>
+                            <div class="js-slide" style="cursor: pointer;">
+                                <img class="img-fluid" src='<%= picture.image %>' alt="Image Description">
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="col-md-7 mb-md-6 mb-lg-0">
+                    <div class="mb-2">
+                        <div class="border-bottom mb-3 pb-md-1 pb-3"> 
+                                <a href="#" class="font-size-12 text-gray-5 mb-2 d-inline-block"></a>
+                                <h2 class="font-size-25 text-lh-1dot2"><%= product.product_name %></h2>
+                                <div class="mb-2">
+                                    <a class="d-inline-flex align-items-center small font-size-15 text-lh-1" href="#">
+                                        <div class="text-warning mr-2">
+                                            <small class="fas fa-star"></small>
+                                            <small class="fas fa-star"></small>
+                                            <small class="fas fa-star"></small>
+                                            <small class="fas fa-star"></small>
+                                            <small class="far fa-star text-muted"></small>
+                                        </div>
+                                        <span class="text-secondary font-size-13">(3 customer reviews)</span>
+                                    </a>
+                                </div>
+                            <div class="d-md-flex align-items-center">
+                                <a href="#" class="max-width-150 ml-n2 mb-2 mb-md-0 d-block"><img class="img-fluid" src='<%= pictures[0].image %>' alt="Image Description"></a>
+                                <div class="ml-md-3 text-gray-9 font-size-14">Availability: <span class="text-green font-weight-bold"><%= product.product_quantity %> in stock</span></div>
+                            </div>
+                        </div>
+                        <div class="flex-horizontal-center flex-wrap mb-4">
+                            <a href="#" class="text-gray-6 font-size-13 mr-2"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                            <a href="#" class="text-gray-6 font-size-13 ml-2"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                        </div>
+                        <div class="mb-2">
+                            <ul class="font-size-14 pl-3 ml-1 text-gray-110">
+                                <li><%= product.product_name %></li>
+                                <li><%= product.product_price %> Cedis</li>
+                                <li><%= product.product_quantity %> items</li>
+                                <li><%= product.createdAt %></li>
+                            </ul>
+                        </div>
+                        <p><%= product.product_description %></p>
+                        <p><strong><%= product.product_name %></strong></p>
+                        <div class="mb-4">
+                            <div class="d-flex align-items-baseline">
+                                <% if(product.discount === 0 ){ %>
+                                    <ins class="font-size-36 text-decoration-none">GHC <%= product.product_price %></ins>
+                                <% } else { %>
+                                    <ins class="font-size-36 text-decoration-none">GHC <%= product.product_price %></ins>
+                                    <del class="font-size-20 ml-2 text-gray-6"><%= product.product_price %></del>
+                                <% } %>
+        
+                            </div>
+                        </div>
+                        <div class="border-top border-bottom py-3 mb-4">
+                            <div class="d-flex align-items-center">
+                                <h6 class="font-size-14 mb-0">Color</h6>
+                                <!-- Select -->
+                                <select class="js-select selectpicker dropdown-select ml-3"
+                                    data-style="btn-sm bg-white font-weight-normal py-2 border">
+                                    <option value="one" selected>White with Gold</option>
+                                    <option value="two">Red</option>
+                                    <option value="three">Green</option>
+                                    <option value="four">Blue</option>
+                                </select>
+                                <!-- End Select -->
+                            </div>
+                        </div>
+                        <div class="d-md-flex align-items-end mb-3">
+                            <div class="max-width-150 mb-4 mb-md-0">
+                                <h6 class="font-size-14">Quantity</h6>
+                                <!-- Quantity -->
+                                <div class="border rounded-pill py-2 px-3 border-color-1">
+                                    <div class="js-quantity row align-items-center">
+                                        <div class="col">
+                                            <input class="js-result form-control h-auto border-0 rounded p-0 shadow-none" type="text" value="1">
+                                        </div>
+                                        <div class="col-auto pr-1">
+                                            <a class="js-minus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                <small class="fas fa-minus btn-icon__inner"></small>
+                                            </a>
+                                            <a class="js-plus btn btn-icon btn-xs btn-outline-secondary rounded-circle border-0" href="javascript:;">
+                                                <small class="fas fa-plus btn-icon__inner"></small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Quantity -->
+                            </div>
+                            <div class="ml-md-3">
+                                <a href="#" class="btn px-5 btn-primary-dark transition-3d-hover"><i class="ec ec-add-to-cart mr-2 font-size-20"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Single Product Body -->
+        
+        <!-- Related products -->
+        <div class="mb-6">
+            <div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
+                <h3 class="section-title mb-0 pb-2 font-size-22">Similar products</h3>
+            </div>
+            <ul class="row list-unstyled products-group no-gutters">
+                <% similarProducts.forEach((product, index)=>{%>
+                    <li class="col-6 col-md-3 col-xl-2gdot4-only col-wd-2 product-item">
+                        <div class="product-item__outer h-100">
+                            <div class="product-item__inner px-xl-4 p-3">
+                                <div class="product-item__body pb-xl-2">
+                                    <!-- <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div> -->
+                                    <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold"><%= product.product_name %> </a></h5>
+                                    <div class="mb-2">
+                                        <% for(let image of images){  
+                                            if(image.productId === product.id){ %>
+                                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src='<%= image.image %>' alt="Image Description"></a>
+                                                <% break;}
+                                        }%> 
+                                    </div>
+                                    <div class="flex-center-between mb-1">
+                                        <% if(product.discount === 0 ){ %> 
+                                            <div class="flex-center-between mb-1">
+                                                <div class="prodcut-price">
+                                                    <div class="text-gray-100">$<%= product.product_price %> .00 </div>
+                                                </div>
+                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                    <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                                <div class="flex-center-between mb-1">
+                                                    <div class="prodcut-price d-flex align-items-center position-relative">
+                                                        <ins class="font-size-20 text-red text-decoration-none">$1999,00</ins>
+                                                        <del class="font-size-12 tex-gray-6 position-absolute bottom-100">$<%= product.price %> </del>
+                                                    </div>
+                                                    <div class="d-none d-xl-block prodcut-add-cart">
+                                                        <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                    </div>
+                                                </div> 
+                                            <% } %>
+                                    </div>
+                                </div>
+                                <div class="product-item__footer">
+                                    <div class="border-top pt-2 flex-center-between flex-wrap">
+                                        <a href="../shop/compare.html" class="text-gray-6 font-size-13"><i class="ec ec-compare mr-1 font-size-15"></i> Compare</a>
+                                        <a href="../shop/wishlist.html" class="text-gray-6 font-size-13"><i class="ec ec-favorites mr-1 font-size-15"></i> Wishlist</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+               <% }) %> 
+            </ul>
+        </div>
+        
+        <div class="mb-8">
+            <div class="py-2 border-top border-bottom">
+                <div class="js-slick-carousel u-slick my-1"
+                    data-slides-show="5"
+                    data-slides-scroll="1"
+                    data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y"
+                    data-arrow-left-classes="fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9"
+                    data-arrow-right-classes="fa fa-angle-right u-slick__arrow-classic-inner--right"
+                    data-responsive='[{
+                        "breakpoint": 992,
+                        "settings": {
+                            "slidesToShow": 2
+                        }
+                    }, {
+                        "breakpoint": 768,
+                        "settings": {
+                            "slidesToShow": 1
+                        }
+                    }, {
+                        "breakpoint": 554,
+                        "settings": {
+                            "slidesToShow": 1
+                        }
+                    }]'>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img1.png" alt="Image Description">
+                        </a>
+                    </div>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img2.png" alt="Image Description">
+                        </a>
+                    </div>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img3.png" alt="Image Description">
+                        </a>
+                    </div>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img4.png" alt="Image Description">
+                        </a>
+                    </div>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img5.png" alt="Image Description">
+                        </a>
+                    </div>
+                    <div class="js-slide">
+                        <a href="#" class="link-hover__brand">
+                            <img class="img-fluid m-auto max-height-50" src="../../assets/img/200X60/img6.png" alt="Image Description">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Brand Carousel -->
+    </div>
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+
+<%- include('../partials/footer');%>
